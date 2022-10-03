@@ -12,7 +12,7 @@ credentials = {
     'vcu': 'rams'
 }
 
-url = 'https://pong-assignment2.herokuapp.com'
+url = 'https://pong-assignment2.herokuapp.com/'
 
 @auth.get_password
 def get_pw(username):
