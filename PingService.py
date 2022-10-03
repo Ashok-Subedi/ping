@@ -34,7 +34,7 @@ def do_ping():
     start = time.perf_counter()
     r = requests.get(url+"pong",auth = dauth("vcu","rams"))
     request_time = time.perf_counter() - start
-    pingpong_t = request_time
+    pingpong_t = request_time * 1000
     return jsonify({"time":pingpong_t})
 
 if __name__ == '__main__':
