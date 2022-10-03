@@ -32,7 +32,7 @@ def internal_server_error(e):
 @auth.login_required
 def do_ping():
     start = time.perf_counter()
-    r = requests.get(url+"pong",auth = dauth("vcu","rams"))
+    requests.get(url+"pong",auth = dauth("vcu","rams"))
     request_time = time.perf_counter() - start
     pingpong_t = request_time * 1000
     return jsonify({"time":pingpong_t})
