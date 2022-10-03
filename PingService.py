@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from flask_httpauth import HTTPDigestAuth
 from requests.auth import HTTPDigestAuth as dauth
 import requests
-import json
+import time
 
 app = Flask(__name__)
 auth = HTTPDigestAuth()
@@ -12,7 +12,7 @@ credentials = {
     'vcu': 'rams'
 }
 
-url = 'https://pong-assignment2.herokuapp.com/'
+url = 'http://127.0.0.1:5001/'
 
 @auth.get_password
 def get_pw(username):
@@ -31,9 +31,10 @@ def internal_server_error(e):
 @app.route('/ping', methods=['GET'])
 @auth.login_required
 def do_ping():
+    start = time.perf_counter()
     r = requests.get(url+"pong",auth = dauth("vcu","rams"))
-    recording_time = r.elapsed.total_seconds() * 10000
-    pingpong_t = recording_time
+    request_time = time.perf_counter() - start
+    pingpong_t = request_time
     return jsonify({"time":pingpong_t})
 
 if __name__ == '__main__':
